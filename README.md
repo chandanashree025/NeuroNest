@@ -1,105 +1,163 @@
-# NeuroNest
+# 🧠 NeuroNest
 
-Personal Memory & Cognitive Assistance Platform
+### Personal Memory & Cognitive Assistance Platform for Older Adults
 
-## Overview
+NeuroNest is a web-based personal memory and cognitive assistance platform designed to support older adults and caregivers through personalized cognitive activities, memory assistance, an AI companion, progress tracking, and caregiver insights.
 
-A full-stack AI-powered healthcare and wellbeing web application designed to provide memory assistance, cognitive activities, personalized support, and caregiver insights for older adults.
+The platform combines cognitive games, cognitive assessment, personal memory management, family information, multilingual interaction, and an agent-based AI architecture in a single application.
 
-## Technology
+---
 
-Frontend:
-- React
-- TypeScript
-- Vite
-- Tailwind CSS
-
-Backend:
-- Python
-- FastAPI
-- SQLite
-
-AI:
-- AI Orchestrator
-- Cognitive Coach
-- Personal Memory Agent
-- Companion Agent
-- Guardian Agent
-
-## Features
-
-- User authentication
-- Older Adult and Caregiver roles
-- Cognitive games
-- Easy / Medium / Hard difficulty levels across all 7 games:
-  1. Memory Match (*Episodic Memory*)
-  2. Sequence Recall (*Working Memory*)
-  3. Odd One Out (*Attention*)
-  4. Pattern Completion (*Reasoning*)
-  5. Word Recall (*Verbal Memory*)
-  6. Picture Memory (*Visual Memory*)
-  7. Number Ordering (*Attention & Reasoning*)
-- Cognitive activity assessment
-- Personal memory library
-- Family member management & photos
-- AI Companion with speech synthesis & speech recognition
-- Multilingual support (English, Kannada, Hindi, Tamil, Telugu, Malayalam, Bengali, Assamese)
-- Progress tracking with daily/weekly domain metrics
-- Caregiver insights & patient linking
-- Accessibility settings (high contrast, text scaling)
-- Light/Dark theme (calm light blue default, deep dark navy)
-
-## Local Development
-
-### Prerequisites
-- Python 3.10+
-- Node.js 18+
-
-### Backend
-
-```bash
-cd backend
-pip install -r requirements.txt
-python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
-```
-
-- **Backend API**: http://127.0.0.1:8000
-- **Swagger Documentation**: http://127.0.0.1:8000/docs
-- **ReDoc Documentation**: http://127.0.0.1:8000/redoc
+# 🌐 Live Application
 
 ### Frontend
 
-```bash
-cd frontend
-npm install
-npm run dev -- --host 127.0.0.1 --port 5173
-```
+🔗 https://neuro-nest-1fp1.vercel.app/
 
-- **Frontend Application**: http://127.0.0.1:5173
+### Backend API
 
-## Environment Variables
+🔗 https://neuronest-cxxk.onrender.com/
 
-Copy `.env.example` to `.env` and add local credentials:
+### Swagger API Documentation
 
-```bash
-cp .env.example .env
-```
+🔗 https://neuronest-cxxk.onrender.com/docs
 
-```env
-# NeuroNest Environment Configuration
-SECRET_KEY=change_this_in_production
-ALGORITHM=HS256
-ACCESS_TOKEN_EXPIRE_MINUTES=1440
-DATABASE_URL=sqlite:///./neuronest.db
+### ReDoc API Documentation
 
-# LLM Integration (Optional - intelligent local fallback system operates when empty)
-LLM_API_KEY=your_api_key_here
-LLM_MODEL=gemini-1.5-flash
-LLM_ENDPOINT=
-```
+🔗 https://neuronest-cxxk.onrender.com/redoc
 
-Never commit `.env` or real API keys.
+---
 
-## Safety
+# ✨ Key Features
 
-NeuroNest provides memory and cognitive assistance. It does not replace professional medical care, diagnosis, or clinical advice.
+## 👤 User Authentication
+
+- User registration and login
+- Role-based access
+- Older Adult role
+- Caregiver role
+- Secure authentication
+- Personalized user dashboard
+
+---
+
+## 🧠 Cognitive Games
+
+NeuroNest provides seven cognitive games designed to exercise different cognitive abilities.
+
+| Game | Cognitive Skill |
+|---|---|
+| Memory Match | Memory |
+| Sequence Recall | Working Memory |
+| Odd One Out | Attention |
+| Pattern Completion | Reasoning |
+| Word Recall | Memory |
+| Picture Memory | Visual Memory |
+| Number Ordering | Attention & Working Memory |
+
+Each game supports:
+
+- Easy difficulty
+- Medium difficulty
+- Hard difficulty
+- Score tracking
+- Accuracy tracking
+- Mistake tracking
+- Response-time tracking
+- Progress tracking
+
+The games are designed as cognitive assistance activities and are **not diagnostic medical tests**.
+
+---
+
+# 📊 Cognitive Assessment
+
+The cognitive assessment evaluates performance across multiple areas:
+
+- Memory
+- Working Memory
+- Attention
+- Reasoning
+
+Assessment results are used to provide personalized insights and recommendations.
+
+> NeuroNest does not provide medical diagnosis or replace professional medical care.
+
+---
+
+# 🧠 Personal Memory Library
+
+Users can create and manage personal memories.
+
+Features include:
+
+- Add memories
+- Edit memories
+- Delete memories
+- Categorize memories
+- Store personal information
+- Access memories through the platform
+
+Memory information can support personalized interactions with the AI companion.
+
+---
+
+# 👨‍👩‍👧 Family Directory
+
+Users can maintain information about important people in their lives.
+
+Features include:
+
+- Family member profiles
+- Relationship information
+- Photos
+- Personal details
+- Photo uploads
+
+This information can help create more personalized memory assistance.
+
+---
+
+# 🤖 Agent-Based AI Architecture
+
+NeuroNest uses an agent-based architecture consisting of multiple specialized AI agents.
+
+### AI Orchestrator
+
+Coordinates the different agents and manages the overall interaction flow.
+
+### Cognitive Coach
+
+Analyzes cognitive-game performance and supports personalized activity selection and difficulty progression.
+
+### Personal Memory Agent
+
+Works with stored personal memories, relationships, people, places, events, and routines.
+
+### Companion Agent
+
+Provides conversational interaction with the older adult through text and voice.
+
+### Guardian Agent
+
+Supports caregiver awareness through insights and alerts when appropriate.
+
+---
+
+# 🔄 AI Interaction Flow
+
+```text
+User Interaction
+       ↓
+AI Orchestrator
+       ↓
+┌─────────────────────────────┐
+│ Cognitive Coach             │
+│ Personal Memory Agent       │
+│ Companion Agent             │
+│ Guardian Agent              │
+└─────────────────────────────┘
+       ↓
+Personalized Response
+       ↓
+User / Caregiver
