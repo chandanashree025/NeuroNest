@@ -1,15 +1,15 @@
 import React from 'react';
-import { Menu, Sun, Moon, Globe, Type, Users, Eye } from 'lucide-react';
+import { Sun, Moon, Globe, Type, Users, Eye } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { LanguageCode } from '../../types';
 
 interface HeaderProps {
-  onToggleSidebar: () => void;
+  onToggleSidebar?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
+export const Header: React.FC<HeaderProps> = () => {
   const { user, activePatient, setActivePatient } = useAuth();
   const { theme, toggleTheme, textSize, setTextSize, highContrast, toggleHighContrast } = useTheme();
   const { language, setLanguage, supportedLanguages } = useLanguage();
@@ -23,14 +23,6 @@ export const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
   return (
     <header className="sticky top-0 z-30 flex items-center justify-between h-16 sm:h-20 px-4 sm:px-6 bg-white/95 dark:bg-navy-850/95 backdrop-blur border-b border-sky-100 dark:border-navy-700 transition-colors">
       <div className="flex items-center gap-3">
-        <button
-          onClick={onToggleSidebar}
-          aria-label="Toggle navigation menu"
-          className="p-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-sky-50 dark:hover:bg-navy-800 focus:outline-none focus:ring-2 focus:ring-sky-500"
-        >
-          <Menu className="w-6 h-6" />
-        </button>
-
         {activePatient && (
           <div className="flex items-center gap-2 px-3 py-1.5 bg-sky-100 dark:bg-sky-950/80 border border-sky-300 dark:border-sky-800 rounded-full text-xs sm:text-sm text-sky-900 dark:text-sky-200">
             <Users className="w-4 h-4 text-sky-600" />

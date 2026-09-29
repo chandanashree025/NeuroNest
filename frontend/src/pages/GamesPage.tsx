@@ -1,10 +1,20 @@
 import React, { useState } from 'react';
 import {
   Brain,
+  ListOrdered,
+  ScanSearch,
+  Puzzle,
+  BookOpen,
+  Image,
+  ArrowDown10,
   Play,
   ArrowLeft,
   Clock,
   Sparkles,
+  Target,
+  Trophy,
+  Check,
+  type LucideIcon,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { gamesApi } from '../services/api';
@@ -18,6 +28,8 @@ import { WordRecallGame } from '../games/WordRecallGame';
 import { PictureMemoryGame } from '../games/PictureMemoryGame';
 import { NumberOrderingGame } from '../games/NumberOrderingGame';
 
+import { DifficultySelector } from '../components/common/DifficultySelector';
+
 interface GameCardMeta {
   id: string;
   name: string;
@@ -25,7 +37,7 @@ interface GameCardMeta {
   category: string;
   description: string;
   duration: string;
-  icon: string;
+  icon: LucideIcon;
   color: string;
 }
 
@@ -37,8 +49,8 @@ const ALL_GAMES: GameCardMeta[] = [
     category: 'Memory',
     description: 'Flip and match calm pairs of comforting illustrations.',
     duration: '3 mins',
-    icon: '🌻',
-    color: 'from-sky-400 to-sky-600',
+    icon: Brain,
+    color: 'from-sky-500 to-sky-700',
   },
   {
     id: 'sequence-recall',
@@ -47,8 +59,8 @@ const ALL_GAMES: GameCardMeta[] = [
     category: 'Working Memory',
     description: 'Watch gently glowing sequence patterns and repeat them.',
     duration: '2 mins',
-    icon: '✨',
-    color: 'from-teal-400 to-teal-600',
+    icon: ListOrdered,
+    color: 'from-teal-500 to-teal-700',
   },
   {
     id: 'odd-one-out',
@@ -57,8 +69,8 @@ const ALL_GAMES: GameCardMeta[] = [
     category: 'Attention',
     description: 'Identify the item or shape that differs from the rest.',
     duration: '2 mins',
-    icon: '🔍',
-    color: 'from-amber-400 to-amber-600',
+    icon: ScanSearch,
+    color: 'from-amber-500 to-amber-700',
   },
   {
     id: 'pattern-completion',
@@ -67,8 +79,8 @@ const ALL_GAMES: GameCardMeta[] = [
     category: 'Reasoning',
     description: 'Discover the missing item in logical progressive sequences.',
     duration: '3 mins',
-    icon: '🧩',
-    color: 'from-indigo-400 to-indigo-600',
+    icon: Puzzle,
+    color: 'from-indigo-500 to-indigo-700',
   },
   {
     id: 'word-recall',
@@ -77,8 +89,8 @@ const ALL_GAMES: GameCardMeta[] = [
     category: 'Memory',
     description: 'Read and memorize pleasant everyday words, then recall them.',
     duration: '3 mins',
-    icon: '📖',
-    color: 'from-rose-400 to-rose-600',
+    icon: BookOpen,
+    color: 'from-rose-500 to-rose-700',
   },
   {
     id: 'picture-memory',
@@ -87,8 +99,8 @@ const ALL_GAMES: GameCardMeta[] = [
     category: 'Memory',
     description: 'Study a cozy everyday scene and answer observational questions.',
     duration: '3 mins',
-    icon: '🖼️',
-    color: 'from-emerald-400 to-emerald-600',
+    icon: Image,
+    color: 'from-emerald-500 to-emerald-700',
   },
   {
     id: 'number-ordering',
@@ -97,8 +109,8 @@ const ALL_GAMES: GameCardMeta[] = [
     category: 'Attention & Reasoning',
     description: 'Tap numbers in ascending order across a relaxed grid.',
     duration: '2 mins',
-    icon: '🔢',
-    color: 'from-cyan-400 to-blue-600',
+    icon: ArrowDown10,
+    color: 'from-sky-500 to-indigo-700',
   },
 ];
 
@@ -240,15 +252,15 @@ export const GamesPage: React.FC = () => {
           return (
             <div
               key={game.id}
-              className="p-6 bg-white dark:bg-navy-850 rounded-3xl border border-sky-100 dark:border-navy-700 shadow-sm hover:shadow-lg hover:border-sky-300 dark:hover:border-sky-600 transition-all flex flex-col justify-between group space-y-5"
+              className="p-5 sm:p-6 bg-white dark:bg-navy-850 rounded-3xl border border-sky-100 dark:border-navy-700 shadow-sm hover:shadow-lg hover:border-sky-300 dark:hover:border-sky-600 transition-all flex flex-col justify-between group space-y-5 w-full min-w-0 box-border overflow-hidden"
             >
-              <div className="space-y-4">
+              <div className="space-y-4 min-w-0">
                 {/* Icon & Cognitive Ability Badge */}
                 <div className="flex items-center justify-between">
-                  <span className="text-4xl p-2 rounded-2xl bg-sky-50 dark:bg-navy-800 border border-sky-100 dark:border-navy-700">
-                    {game.icon}
-                  </span>
-                  <span className="px-3 py-1 bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-300 text-xs font-bold rounded-full">
+                  <div className="w-12 h-12 rounded-2xl bg-sky-50 dark:bg-navy-800 border border-sky-100 dark:border-navy-700 flex items-center justify-center text-sky-700 dark:text-sky-300 shadow-sm">
+                    <game.icon className="w-6 h-6" />
+                  </div>
+                  <span className="px-3 py-1 bg-sky-100 dark:bg-sky-950 text-sky-800 dark:text-sky-200 text-xs font-bold rounded-full border border-sky-200 dark:border-sky-800">
                     {game.skill}
                   </span>
                 </div>
@@ -273,38 +285,14 @@ export const GamesPage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="space-y-4 pt-2 border-t border-sky-100 dark:border-navy-800">
-                {/* Difficulty Selector: Easy, Medium, Hard */}
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                      Difficulty Level
-                    </span>
-                    <span className="text-xs font-extrabold text-sky-600 dark:text-sky-400">
-                      {currentDifficulty}
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-3 gap-2">
-                    {(['Easy', 'Medium', 'Hard'] as DifficultyLevel[]).map((lvl) => {
-                      const isSelected = currentDifficulty === lvl;
-                      return (
-                        <button
-                          key={lvl}
-                          type="button"
-                          onClick={() => handleSelectDifficulty(game.id, lvl)}
-                          className={`py-2.5 px-3 text-xs sm:text-sm font-extrabold rounded-2xl border transition-all text-center cursor-pointer ${
-                            isSelected
-                              ? 'bg-sky-500 text-white border-sky-500 shadow-sm ring-2 ring-sky-300 dark:ring-sky-700 scale-102'
-                              : 'bg-sky-50/70 dark:bg-navy-800 text-slate-700 dark:text-slate-300 border-sky-100 dark:border-navy-700 hover:bg-sky-100 dark:hover:bg-navy-700'
-                          }`}
-                          aria-pressed={isSelected}
-                        >
-                          {lvl}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
+              <div className="space-y-4 pt-2 border-t border-sky-100 dark:border-navy-800 w-full min-w-0">
+                {/* Difficulty Selector */}
+                <DifficultySelector
+                  value={currentDifficulty}
+                  onChange={(lvl) => handleSelectDifficulty(game.id, lvl)}
+                  gameName={game.name}
+                  className="w-full min-w-0"
+                />
 
                 {/* Start Game Button */}
                 <button

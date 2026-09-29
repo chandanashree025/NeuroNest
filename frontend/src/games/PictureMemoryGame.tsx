@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GameResult, DifficultyLevel } from '../types';
 import { GameResultModal } from './GameResultModal';
 import { Image as ImageIcon, RotateCcw, Clock } from 'lucide-react';
+import { DifficultySelector } from '../components/common/DifficultySelector';
 
 interface Props {
   userId: string;
@@ -229,48 +230,40 @@ export const PictureMemoryGame: React.FC<Props> = ({
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       {/* Header */}
-      <div className="p-6 bg-white dark:bg-navy-850 rounded-3xl border border-sky-100 dark:border-navy-700 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-2 text-sky-600 dark:text-sky-400 font-bold text-sm mb-1">
-            <ImageIcon className="w-5 h-5" />
-            <span>Visual Memory Exercise</span>
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-800 dark:text-slate-100">
-            Picture Memory
-          </h2>
-          <p className="text-slate-500 dark:text-slate-400 text-sm">
-            {phase === 'study'
-              ? `Observe this cozy setting (${sceneData.items.length} items, ${difficulty} Level)`
-              : `Question ${questionIdx + 1} of ${questions.length}`}
-          </p>
-        </div>
-
-        <div className="flex items-center gap-2">
-          {/* Level Switcher */}
-          <div className="flex items-center gap-1 p-1 bg-sky-50 dark:bg-navy-800 rounded-2xl border border-sky-200 dark:border-navy-700">
-            {(['Easy', 'Medium', 'Hard'] as DifficultyLevel[]).map((lvl) => (
-              <button
-                key={lvl}
-                onClick={() => handleDifficultyChange(lvl)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
-                  difficulty === lvl
-                    ? 'bg-sky-500 text-white shadow-sm'
-                    : 'text-slate-600 dark:text-slate-300 hover:text-sky-600'
-                }`}
-              >
-                {lvl}
-              </button>
-            ))}
+      <div className="p-5 sm:p-6 bg-white dark:bg-navy-850 rounded-3xl border border-sky-100 dark:border-navy-700 shadow-sm space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2 text-sky-600 dark:text-sky-400 font-bold text-sm mb-1">
+              <ImageIcon className="w-5 h-5" />
+              <span>Visual Memory Exercise</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-800 dark:text-slate-100">
+              Picture Memory
+            </h2>
+            <p className="text-slate-500 dark:text-slate-400 text-sm">
+              {phase === 'study'
+                ? `Observe this cozy setting (${sceneData.items.length} items, ${difficulty} Level)`
+                : `Question ${questionIdx + 1} of ${questions.length}`}
+            </p>
           </div>
 
           <button
             onClick={() => startNewGame(difficulty)}
-            className="p-2.5 rounded-2xl bg-sky-50 dark:bg-navy-800 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-navy-700"
+            className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] dark:bg-navy-800 text-[#243447] dark:text-slate-200 border border-[#E8E4DC] dark:border-navy-700 hover:bg-[#F2ECE1] dark:hover:bg-navy-700 font-bold text-xs transition-colors self-end sm:self-center cursor-pointer"
             title="Restart"
           >
-            <RotateCcw className="w-5 h-5" />
+            <RotateCcw className="w-4 h-4" />
+            <span>Restart</span>
           </button>
         </div>
+
+        {/* Difficulty Selector */}
+        <DifficultySelector
+          value={difficulty}
+          onChange={handleDifficultyChange}
+          gameName="Picture Memory"
+          className="w-full min-w-0"
+        />
       </div>
 
       {/* Main View */}

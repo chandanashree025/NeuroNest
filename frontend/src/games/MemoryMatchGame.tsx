@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GameResult, DifficultyLevel } from '../types';
 import { GameResultModal } from './GameResultModal';
 import { RotateCcw, Brain, Sparkles } from 'lucide-react';
+import { DifficultySelector } from '../components/common/DifficultySelector';
 
 interface Props {
   userId: string;
@@ -177,53 +178,46 @@ export const MemoryMatchGame: React.FC<Props> = ({
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       {/* Header Info */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 bg-white dark:bg-navy-850 rounded-3xl border border-sky-100 dark:border-navy-700 shadow-sm">
-        <div>
-          <div className="flex items-center gap-2 text-sky-600 dark:text-sky-400 font-bold text-sm">
-            <Brain className="w-5 h-5" />
-            <span>Episodic Memory Exercise</span>
+      <div className="p-5 sm:p-6 bg-white dark:bg-navy-850 rounded-3xl border border-sky-100 dark:border-navy-700 shadow-sm space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2 text-sky-600 dark:text-sky-400 font-bold text-sm">
+              <Brain className="w-5 h-5" />
+              <span>Episodic Memory Exercise</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-800 dark:text-slate-100">
+              Memory Match
+            </h2>
+            <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">
+              Tap cards to find matching gentle pairs ({pairsCount} pairs for {difficulty} level).
+            </p>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-800 dark:text-slate-100">
-            Memory Match
-          </h2>
-          <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">
-            Tap cards to find matching gentle pairs ({pairsCount} pairs for {difficulty} level).
-          </p>
+
+          <div className="flex items-center gap-4 self-end sm:self-center">
+            <div className="text-right">
+              <span className="text-xs text-slate-400 block font-medium">Pairs</span>
+              <span className="text-xl font-bold text-[#C86D56] dark:text-[#D47A65]">
+                {matches} / {pairsCount}
+              </span>
+            </div>
+
+            <button
+              onClick={() => initGame(difficulty)}
+              className="flex items-center gap-1.5 px-3.5 py-2.5 bg-[#FAF7F2] dark:bg-navy-800 text-[#243447] dark:text-slate-200 font-bold text-xs rounded-xl border border-[#E8E4DC] dark:border-navy-700 hover:bg-[#F2ECE1] dark:hover:bg-navy-700 transition-colors cursor-pointer"
+            >
+              <RotateCcw className="w-4 h-4" />
+              Restart
+            </button>
+          </div>
         </div>
 
-        {/* Difficulty Selector and Restart */}
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="flex items-center gap-1 p-1 bg-sky-50 dark:bg-navy-800 rounded-2xl border border-sky-200 dark:border-navy-700">
-            {(['Easy', 'Medium', 'Hard'] as DifficultyLevel[]).map((lvl) => (
-              <button
-                key={lvl}
-                onClick={() => handleDifficultyChange(lvl)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
-                  difficulty === lvl
-                    ? 'bg-sky-500 text-white shadow-sm'
-                    : 'text-slate-600 dark:text-slate-300 hover:text-sky-600'
-                }`}
-              >
-                {lvl}
-              </button>
-            ))}
-          </div>
-
-          <div className="text-right">
-            <span className="text-xs text-slate-400 block font-medium">Pairs</span>
-            <span className="text-lg font-bold text-sky-600 dark:text-sky-400">
-              {matches} / {pairsCount}
-            </span>
-          </div>
-
-          <button
-            onClick={() => initGame(difficulty)}
-            className="flex items-center gap-1.5 px-3.5 py-2 bg-sky-50 dark:bg-navy-800 text-sky-700 dark:text-sky-300 font-bold text-xs rounded-xl border border-sky-200 dark:border-navy-700 hover:bg-sky-100"
-          >
-            <RotateCcw className="w-4 h-4" />
-            Restart
-          </button>
-        </div>
+        {/* Difficulty Selector */}
+        <DifficultySelector
+          value={difficulty}
+          onChange={handleDifficultyChange}
+          gameName="Memory Match"
+          className="w-full min-w-0"
+        />
       </div>
 
       {/* Cards Grid */}

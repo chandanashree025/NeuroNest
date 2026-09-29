@@ -58,16 +58,16 @@ html.reduce-motion *::after {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #BAC4BE;
   border-radius: 4px;
 }
 
 .dark ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: #33485C;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #8E9A93;
 }
 
 /* Elderly-friendly button and touch standards */
@@ -76,6 +76,6 @@ button, a, input, select, textarea {
 }
 
 button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
-  outline: 3px solid #38bdf8;
+  outline: 3px solid #2F6F73;
   outline-offset: 2px;
 }

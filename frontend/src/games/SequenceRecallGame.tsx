@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GameResult, DifficultyLevel } from '../types';
 import { GameResultModal } from './GameResultModal';
 import { Brain, Play, RotateCcw } from 'lucide-react';
+import { DifficultySelector } from '../components/common/DifficultySelector';
 
 interface Props {
   userId: string;
@@ -188,23 +189,13 @@ export const SequenceRecallGame: React.FC<Props> = ({
         </p>
 
         {/* Difficulty Selector */}
-        <div className="flex items-center justify-center gap-1.5 pt-1">
-          <span className="text-xs text-slate-400 font-bold mr-1">Level:</span>
-          {(['Easy', 'Medium', 'Hard'] as DifficultyLevel[]).map((lvl) => (
-            <button
-              key={lvl}
-              onClick={() => handleDifficultyChange(lvl)}
-              disabled={isShowingSequence}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
-                difficulty === lvl
-                  ? 'bg-sky-500 text-white shadow-sm'
-                  : 'bg-sky-50 dark:bg-navy-800 text-slate-600 dark:text-slate-300 hover:bg-sky-100'
-              }`}
-            >
-              {lvl}
-            </button>
-          ))}
-        </div>
+        <DifficultySelector
+          value={difficulty}
+          onChange={handleDifficultyChange}
+          disabled={isShowingSequence}
+          gameName="Sequence Recall"
+          className="text-left w-full min-w-0"
+        />
 
         {gameStarted && (
           <div className="flex items-center justify-center gap-6 mt-3 pt-3 border-t border-sky-100 dark:border-navy-700">

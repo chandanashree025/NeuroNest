@@ -12,7 +12,8 @@ import {
   CheckCircle,
   Sun,
   Moon,
-  Globe
+  Globe,
+  Flower2
 } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -139,8 +140,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               {/* Graphic cards */}
               <div className="space-y-4">
                 <div className="p-4 bg-white dark:bg-navy-900 rounded-2xl shadow-md border border-sky-100 dark:border-navy-700 flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-sky-100 dark:bg-sky-950 text-sky-600 flex items-center justify-center text-2xl">
-                    🌻
+                  <div className="w-12 h-12 rounded-2xl bg-sky-100 dark:bg-sky-950 text-sky-600 dark:text-sky-400 flex items-center justify-center">
+                    <Flower2 className="w-6 h-6" />
                   </div>
                   <div>
                     <h4 className="font-bold text-sm text-slate-800 dark:text-slate-100">Sunday Garden Memory</h4>

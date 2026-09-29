@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { HeartHandshake, LogIn, Lock, Mail, AlertCircle, Sparkles } from 'lucide-react';
+import { HeartHandshake, LogIn, Lock, Mail, AlertCircle, Sparkles, UserRound, HeartPulse } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 interface LoginPageProps {
@@ -163,16 +163,18 @@ export const LoginPage: React.FC<LoginPageProps> = ({
               <button
                 type="button"
                 onClick={() => handleQuickDemo('elderly@neuronest.org')}
-                className="flex-1 py-2 px-3 bg-sky-50 hover:bg-sky-100 dark:bg-navy-800 dark:hover:bg-navy-700 text-sky-700 dark:text-sky-300 rounded-xl text-xs font-bold border border-sky-200 dark:border-navy-700"
+                className="flex-1 py-2.5 px-3 bg-sky-50 hover:bg-sky-100 dark:bg-navy-800 dark:hover:bg-navy-700 text-sky-700 dark:text-sky-300 rounded-xl text-xs font-bold border border-sky-200 dark:border-navy-700 flex items-center justify-center gap-1.5"
               >
-                👴 Older Adult Demo
+                <UserRound className="w-4 h-4 text-sky-600 dark:text-sky-400" />
+                <span>Older Adult Demo</span>
               </button>
               <button
                 type="button"
                 onClick={() => handleQuickDemo('caregiver@neuronest.org')}
-                className="flex-1 py-2 px-3 bg-teal-50 hover:bg-teal-100 dark:bg-navy-800 dark:hover:bg-navy-700 text-teal-700 dark:text-teal-300 rounded-xl text-xs font-bold border border-teal-200 dark:border-navy-700"
+                className="flex-1 py-2.5 px-3 bg-teal-50 hover:bg-teal-100 dark:bg-navy-800 dark:hover:bg-navy-700 text-teal-700 dark:text-teal-300 rounded-xl text-xs font-bold border border-teal-200 dark:border-navy-700 flex items-center justify-center gap-1.5"
               >
-                👩‍⚕️ Caregiver Demo
+                <HeartPulse className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                <span>Caregiver Demo</span>
               </button>
             </div>
           </div>

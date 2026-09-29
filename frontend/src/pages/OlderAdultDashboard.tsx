@@ -8,12 +8,12 @@ import {
   CalendarCheck,
   Play,
   ArrowRight,
-  Sun,
   Sparkles,
   Heart
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../i18n/LanguageContext';
+import { useGreeting } from '../hooks/useGreeting';
 
 interface Props {
   onNavigate: (page: string) => void;
@@ -22,20 +22,22 @@ interface Props {
 export const OlderAdultDashboard: React.FC<Props> = ({ onNavigate }) => {
   const { user } = useAuth();
   const { t } = useLanguage();
+  const { greeting, greetingKey, icon: greetingEmoji, IconComponent: GreetingIcon } = useGreeting();
 
   const firstName = user?.name ? user.name.split(' ')[0] : 'Friend';
 
   return (
     <div className="space-y-8 animate-in fade-in duration-300">
       {/* Welcome Banner */}
-      <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-sky-400 via-sky-500 to-teal-400 text-white shadow-xl shadow-sky-500/15 relative overflow-hidden">
+      <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-sky-700 via-sky-600 to-sky-700 text-white shadow-soft relative overflow-hidden">
         <div className="relative z-10 max-w-2xl space-y-2">
           <div className="flex items-center gap-2 text-sky-100 font-bold text-sm tracking-wide uppercase">
-            <Sun className="w-5 h-5 text-amber-200 animate-spin-slow" />
-            <span>{t('goodMorning', 'Good Morning')} ☀️</span>
+            <GreetingIcon className="w-5 h-5 text-amber-300" />
+            <span>{t(greetingKey, greeting)}</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight drop-shadow-sm">
-            {t('goodMorning', 'Good Morning')}, {firstName}!
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight drop-shadow-sm flex items-center flex-wrap gap-3">
+            <span>{t(greetingKey, greeting)}, {firstName}</span>
+            <GreetingIcon className="w-8 h-8 sm:w-10 sm:h-10 text-amber-300 shrink-0 inline-block" />
           </h1>
           <p className="text-lg sm:text-xl text-sky-50 font-medium pt-1">
             {t('howToSpendTime', 'How would you like to spend your time today?')}
@@ -43,7 +45,7 @@ export const OlderAdultDashboard: React.FC<Props> = ({ onNavigate }) => {
         </div>
 
         {/* Decorative background shape */}
-        <div className="absolute right-0 bottom-0 translate-x-12 translate-y-12 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none" />
+        <div className="absolute right-0 bottom-0 translate-x-12 translate-y-12 w-64 h-64 bg-white/5 rounded-full blur-2xl pointer-events-none" />
       </div>
 
       {/* Today's Recommendation Card */}
